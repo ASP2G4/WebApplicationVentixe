@@ -10,15 +10,18 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplicationVentixe.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <div class="container">
+<body class="d-flex">
+    @await Html.PartialAsync("Partials/_Sidebar")
+
+    <div class="flex-grow-1 d-flex flex-column">
         @await Html.PartialAsync("Partials/_Header")
-        <main role="main" class="pb-3">
+
+        <main role="main" class="flex-grow-1">
             @RenderBody()
         </main>
-        @await Html.PartialAsync("Partials/_Footer")
-    </div>
 
+        @await Html.PartialAsync("Partials/_Footer")        
+    </div>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
