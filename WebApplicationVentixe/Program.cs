@@ -43,7 +43,7 @@ builder.Services.ConfigureApplicationCookie(x =>
 });
 
 var app = builder.Build();
-
+await SeedRoleData.SetRolesAsync(app);
 
 app.UseHsts();
 app.UseHttpsRedirection();

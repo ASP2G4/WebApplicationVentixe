@@ -65,7 +65,7 @@ namespace Authentication.Services
 
                             <p style='font-size: 16px; line-height: 1.5; margin-bottom: 16px;'>To complete your verification, please enter the code below or click the button to open a new page</p>
 
-                            <div style='display:flex; justify-content: center; align-items: center; padding: 16px; background-color: #FcD3FE; font-size: 24px; font-weight: 600;'>{verificationCode}</div>
+                            <div style='display:flex; justify-content: center; align-items: center; padding: 16px; background-color: #FcD3FE; font-size: 24px; font-weight: 600; justify-content: center;'>{verificationCode}</div>
 
                             <div style='text-align: center; margin-top: 32px;'>
                                 <a href='https://localhost:7168/account-verification?email={email}&token=' style='background-color: #F26cF9; color: #FFF; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-size: 16px;'>Open Verification Page</a>
