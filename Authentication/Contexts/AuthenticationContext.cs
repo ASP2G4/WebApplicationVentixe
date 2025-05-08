@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Authentication
+namespace Authentication.Contexts
 {
     public class AuthenticationContext(DbContextOptions<AuthenticationContext> options) : IdentityDbContext<AccountUser>(options)
     {

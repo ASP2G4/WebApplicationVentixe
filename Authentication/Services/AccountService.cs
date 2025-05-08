@@ -17,6 +17,7 @@ namespace Authentication.Services
         public async Task<AccountServiceResult<string>> CreateAccountAsync(AccountUser user, string password)
         {
             var response = await _userManager.CreateAsync(user, password);
+
             return response.Succeeded ?
                 new AccountServiceResult<string> { Succeeded = true, Result = user.Id } :
                 new AccountServiceResult<string> { Succeeded = false, Error = string.Join(", ", response.Errors) };

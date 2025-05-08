@@ -9,7 +9,4 @@ namespace WebApplicationVentixe.Models.SignUp
         [Required(ErrorMessage = "Email must be provided")]
         public string Email { get; set; } = null!;
     }
-    public class ProfileInformationViewModel
-    {
-    }
 }

@@ -34,8 +34,9 @@
                 <input asp-for="RememberMe" class="form-check-input" />
                 <label asp-for="RememberMe" class="form-check-label">Keep me logged in</label>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Log In</button>
+            <button type="submit" class="btn btn-primary w-100 mb-3">Log In</button>
         </form>
+        @await Html.PartialAsync("Partials/_ExternalAuthenticationPartial")
     </div>
     <div class="card-footer text-center">
         <p class="mb-0">Don't have an account yet? <a asp-action="Index" asp-controller="SignUp" >Sign Up</a></p>
