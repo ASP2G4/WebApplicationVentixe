@@ -3,6 +3,7 @@ using Authentication.Entities;
 using Authentication.Models;
 using Authentication.Services;
 using Azure.Communication.Email;
+using Azure.Messaging.ServiceBus;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,18 +12,18 @@ using WebApplicationVentixe.Protos;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-//verification service
+
 builder.Services.AddMemoryCache();
 
-builder.Services.AddSingleton(x => new EmailClient(builder.Configuration["AzureCommunicationServices:ConnectionString"]));
-builder.Services.Configure<AzureCommunicationsSettings>(builder.Configuration.GetSection("AzureCommunicationServices"));
-builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddSingleton(new ServiceBusClient(builder.Configuration["AzureServiceBusSettings:ConnectionString"]));
 builder.Services.AddScoped<IVerificationService, VerificationService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 
+
 builder.Services.AddGrpcClient<ProfileHandler.ProfileHandlerClient>(options =>
 {
-    options.Address = new Uri("https://localhost:7093");
+    var grpcUrl = builder.Configuration["GrpcSettings:ProfileHandlerUrl"];
+    options.Address = new Uri(grpcUrl);
 });
 
 builder.Services.AddDbContext<AuthenticationContext>(options =>

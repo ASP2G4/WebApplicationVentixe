@@ -1,5 +1,6 @@
 ﻿using Authentication.Dtos;
 using Authentication.Models;
+using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Authentication.Services
@@ -13,10 +14,10 @@ namespace Authentication.Services
 
         Task<VerificationServiceResult> ValidateVerificationCodeAsync(string email, string code);
     }
-    public class VerificationService(IEmailService emailService, IMemoryCache cache) : IVerificationService
+    public class VerificationService(ServiceBusClient serviceBusClient, IMemoryCache cache) : IVerificationService
     {
-        private readonly IEmailService _emailService = emailService;
         private readonly IMemoryCache _cache = cache;
+        private readonly ServiceBusClient _serviceBusClient = serviceBusClient;
 
         public string GenerateVerificationCode()
         {
@@ -28,7 +29,6 @@ namespace Authentication.Services
         public async Task<VerificationServiceResult> SendVerificationCodeAsync(string email)
         {
             var verificationCode = GenerateVerificationCode();
-            //PROTOBUF eller något annat som modell för att skicka verifieringskoden till frontend
 
             var emailMessage = new EmailMessageModel
             {
@@ -79,16 +79,24 @@ namespace Authentication.Services
                     </html>"
             };
 
-            //kontaktar en seperat ms tjänst eller kör via azure service bus FIXA FIXA FIXA
-            var response = await _emailService.SendEmailAsync(emailMessage);
-            if (response.Succeeded)
+            var sender = _serviceBusClient.CreateSender("email-queue");
+            var serviceBusMessage = new ServiceBusMessage(new BinaryData(emailMessage))
             {
+                Subject = "SendVerificationCode"
+            };
+
+            try
+            {
+                await sender.SendMessageAsync(serviceBusMessage);
                 await SaveVerificationCodeAsync(email, verificationCode);
+
+                return new VerificationServiceResult { Succeeded = true };
+            }
+            catch (Exception ex)
+            {
+                return new VerificationServiceResult { Succeeded = false, Error = $"Failed to send message to Service Bus: {ex.Message}" };
             }
 
-            return response.Succeeded
-                ? new VerificationServiceResult { Succeeded = true }
-                : new VerificationServiceResult { Succeeded = false, Error = "Unable too send verification code." };
         }
 
         public Task<VerificationServiceResult> SaveVerificationCodeAsync(string email, string code, int validForInMinutes = 5)
