@@ -1,8 +1,6 @@
 using Authentication.Contexts;
 using Authentication.Entities;
-using Authentication.Models;
 using Authentication.Services;
-using Azure.Communication.Email;
 using Azure.Messaging.ServiceBus;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
