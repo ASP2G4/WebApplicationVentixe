@@ -1,0 +1,46 @@
+﻿@model ProfileInformationViewModel
+@{
+    ViewData["Title"] = "Set Profile";
+    Layout = "_AuthLayout";
+}
+
+<div id="signup" class="card mx-auto mt-5">
+    <div class="card-header text-center mt-3">
+        <h2 class="h4 mb-2">Set Your profile information</h2>
+        @if (!string.IsNullOrEmpty(ViewBag?.ErrorMessage))
+        {
+            <p>
+                @ViewBag?.ErrorMessage
+            </p>
+        }
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="ProfileInformation" asp-controller="SignUp" novalidate>
+            <div class="mb-3">
+                <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter your phone number" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="StreetName" class="form-control" placeholder="Enter your street name" />
+                <span asp-validation-for="StreetName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="PostalCode" class="form-control" placeholder="Enter your postal code" />
+                <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="City" class="form-control" placeholder="Enter your city" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-3">Continue</button>
+        </form>
+    </div>
+</div>

@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-        @(string.IsNullOrEmpty(ViewData["Title"] as string) ? "Ventixe." : ViewData["Title"] + " - Ventixe.")</title>
+        @(string.IsNullOrEmpty(ViewData["Title"] as string) ? "Ventixe." : ViewData["Title"] + " - Ventixe.")
+    </title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="https://kit.fontawesome.com/a576612222.css" crossorigin="anonymous">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -12,16 +13,14 @@
     <link rel="stylesheet" href="~/WebApplicationVentixe.styles.css" asp-append-version="true" />
 </head>
 <body class="d-flex">
-    @await Html.PartialAsync("Partials/_Sidebar")
 
     <div class="flex-grow-1 d-flex flex-column">
-        @await Html.PartialAsync("Partials/_Header")
 
         <main role="main" class="flex-grow-1">
             @RenderBody()
         </main>
 
-        @await Html.PartialAsync("Partials/_Footer")        
+
     </div>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
