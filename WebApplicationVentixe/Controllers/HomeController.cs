@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplicationVentixe.Controllers
 {
-    [Authorize]
+    
     public class HomeController : Controller
     {
+        [Authorize]
         public IActionResult Index()
         {
             ViewData["Title"] = "Home";

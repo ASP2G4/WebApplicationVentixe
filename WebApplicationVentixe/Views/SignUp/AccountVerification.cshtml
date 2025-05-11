@@ -10,9 +10,9 @@
         <p class="text-muted">An email with a verification code was sent to @ViewBag.MaskedEmail. Please enter the code to verify.</p>
         @if (!string.IsNullOrEmpty(ViewBag?.ErrorMessage))
         {
-            <p>
+            <div id="error-message" class="text-danger">
                 @ViewBag?.ErrorMessage
-            </p>
+            </div>
         }
     </div>
     <div class="card-body">
@@ -35,25 +35,4 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function (){
-        const boxes = document.querySelectorAll(".verification-code-input");
-        const hiddenInput = document.querySelector("input[name='Code']");
-        boxes[0].focus();
-
-        boxes.forEach((box, index) => {
-            box.addEventListener("input", function (){
-                box.value = box.value.replace(/[^0-9]/g, '');
-                if (box.value.length === 1 && index < boxes.length - 1) {
-                    boxes[index + 1].focus();
-                } 
-                hiddenInput.value = Array.from(boxes).map(b => b.value).join('');
-            });
-            box.addEventListener("keydown", function (e) {
-                if (e.key === "Backspace" && index > 0 && box.value.length === 0) {
-                    boxes[index - 1].focus();
-                }
-            });
-        });
-    });
-</script>
+﻿<script src="/js/verification_validate.js" asp-append-version="true"></script>

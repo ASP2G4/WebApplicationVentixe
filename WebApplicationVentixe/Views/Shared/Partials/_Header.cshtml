@@ -5,6 +5,7 @@
         provider = "local";
 
     var email = User?.FindFirstValue(ClaimTypes.Email);
+    var role = User?.FindFirstValue(ClaimTypes.Role);
 }
 
 <header class="bg-light py-2 px-3">
@@ -31,7 +32,7 @@
             
             <div class="d-flex flex-column justify-content-center d-none d-md-flex">
 				<h5 class="mb-0">@email</h5>
-                <p class="mb-0">Admin</p>
+                <p class="mb-0">@role</p>
                 <p class="mb-0">@provider</p>
             </div>
 			<img src="~/Images/Avatar.svg" alt="User Icon" class="rounded-circle ms-1 me-1 m-md-1" style="width: 40px; height: 40px; object-fit: cover;"> @* flytta till CSS fil *@
@@ -44,7 +45,5 @@
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
-    <div>
-        <a asp-controller="Login" asp-action="Logout" class="btn btn-primary"><span>Sign out</span></a> 
-    </div>
+    
 </header>

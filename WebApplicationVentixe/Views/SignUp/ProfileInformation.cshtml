@@ -7,40 +7,44 @@
 <div id="signup" class="card mx-auto mt-5">
     <div class="card-header text-center mt-3">
         <h2 class="h4 mb-2">Set Your profile information</h2>
+        <p class="text-muted">Last step! Input your information.</p>
+
         @if (!string.IsNullOrEmpty(ViewBag?.ErrorMessage))
         {
-            <p>
+            <div id="error-message" class="text-danger">
                 @ViewBag?.ErrorMessage
-            </p>
+            </div>
         }
     </div>
     <div class="card-body">
         <form method="post" asp-action="ProfileInformation" asp-controller="SignUp" novalidate>
             <div class="mb-3">
-                <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
+                <input asp-for="FirstName" class="form-control" id="firstname" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
+                <input asp-for="LastName" class="form-control" id="lastname" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter your phone number" />
+                <input asp-for="PhoneNumber" class="form-control" id="phonenumber" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input asp-for="StreetName" class="form-control" placeholder="Enter your street name" />
+                <input asp-for="StreetName" class="form-control" id="streetname" />
                 <span asp-validation-for="StreetName" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input asp-for="PostalCode" class="form-control" placeholder="Enter your postal code" />
+                <input asp-for="PostalCode" class="form-control" id="postalcode" />
                 <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input asp-for="City" class="form-control" placeholder="Enter your city" />
+                <input asp-for="City" class="form-control" id="city" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary w-100 mb-3">Continue</button>
         </form>
     </div>
 </div>
+
+﻿<script src="/js/profile_validate.js" asp-append-version="true"></script>

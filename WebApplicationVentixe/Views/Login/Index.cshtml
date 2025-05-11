@@ -11,7 +11,7 @@
         <p class="text-muted">You need to log in to your account. You can log in with your local account or use one of our third-party logins.</p>
         @if (!string.IsNullOrEmpty(ViewBag?.ErrorMessage))
         {
-            <div>
+            <div id="error-message" class="text-danger">
                 @ViewBag?.ErrorMessage
             </div>
         }
@@ -20,14 +20,14 @@
         <form method="post" asp-action="Index" asp-controller="Login" novalidate>
             <input type="hidden" name="returnUrl" value="@ViewBag?.ReturnUrl" />
             <div class="mb-3">
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" id="email-input" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input asp-for="Password" class="form-control" type="password" />
+                <input asp-for="Password" class="form-control" type="password" id="password-input" />
                 <span asp-validation-for="Password" class="text-danger"></span>
                 <div class="text-end mt-2">
-                    <a asp-action="Index" asp-controller="SignUp" >Forgot your password?</a>
+                    <a asp-action="ForgotPassword" asp-controller="Login">Forgot your password?</a>
                 </div>
             </div>
             <div class="mb-3 form-check">
@@ -42,3 +42,5 @@
         <p class="mb-0">Don't have an account yet? <a asp-action="Index" asp-controller="SignUp" >Sign Up</a></p>
     </div>
 </div>
+
+﻿<script src="/js/login_validate.js" asp-append-version="true"></script>

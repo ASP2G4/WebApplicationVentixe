@@ -46,7 +46,7 @@ builder.Services.ConfigureApplicationCookie(x =>
 });
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 })
 .AddCookie()
 .AddGitHub(options =>
