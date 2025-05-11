@@ -89,6 +89,10 @@ namespace WebApplicationVentixe.Controllers
         [HttpGet("set-password")]
         public IActionResult SetPassword()
         {
+            if (TempData["Email"] == null)
+                return RedirectToAction("Index");
+
+            TempData.Keep("Email");
             return View();
         }
         [HttpPost("set-password")]
@@ -133,6 +137,10 @@ namespace WebApplicationVentixe.Controllers
         [HttpGet("profile-information")]
         public IActionResult ProfileInformation()
         {
+            if (TempData["UserId"] == null)
+                return RedirectToAction("Index");
+
+            TempData.Keep("UserId");
             return View();
         }
         [HttpPost("profile-information")]

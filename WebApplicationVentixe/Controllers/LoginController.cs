@@ -21,10 +21,13 @@ namespace WebApplicationVentixe.Controllers
         {
             returnUrl ??= "~/";
             ViewBag.ReturnUrl = returnUrl;
+
             if (ModelState.IsValid)
             {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+   
                 var respone = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                if(respone.Succeeded)
+                if (respone.Succeeded)
                 {
                     return LocalRedirect(ViewBag.ReturnUrl);
                 }
@@ -38,6 +41,36 @@ namespace WebApplicationVentixe.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var resetLink = Url.Action("ResetPassword", "Login", new { token, email = model.Email }, Request.Scheme);
+
+                    // om vi vill lägga till skickande av email för reset gör vi det här, vi får utöka emailservicen
+
+                    ViewBag.Message = "Password reset link has been sent to your email.";
+                }
+                else
+                {
+                    ViewBag.Message = "If the email is registered, a reset link will be sent.";
+                }
+            }
+
+            return View(model);
         }
 
 
@@ -83,7 +116,8 @@ namespace WebApplicationVentixe.Controllers
                 var user = new AccountUser
                 {
                     UserName = username,
-                    Email = email
+                    Email = email,
+                    EmailConfirmed = true,
                 };
 
                 var identityResult = await _userManager.CreateAsync(user);
