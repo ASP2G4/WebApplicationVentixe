@@ -23,6 +23,7 @@
 
 	<ItemGroup>
 		<Protobuf Include="Protos\profile.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\invoice.proto" GrpcServices="Client" />
 	</ItemGroup>
 
   <ItemGroup>
