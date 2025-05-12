@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApplicationVentixe.Services;
 
 namespace WebApplicationVentixe.Controllers
 {
-    public class InvoiceController : Controller
+    public class InvoiceController(InvoiceGrpcClientService invoiceService) : Controller
     {
-        public IActionResult Index()
+        private readonly InvoiceGrpcClientService _invoiceService = invoiceService;
+
+        public async Task<IActionResult> Index()
         {
             ViewData["Title"] = "Invoices";
-            return View();
+            var invoices = await _invoiceService.GetInvoicesAsync();
+            return View(invoices);
         }
     }
 }

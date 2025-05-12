@@ -1,4 +1,7 @@
-﻿<div class="container-fluid mt-3">
+﻿@using WebApplicationVentixe.Protos.Invoice;
+@model List<Invoice>
+
+<div class="container-fluid mt-3">
     <div class="row">
 
         <div class="col-4">
@@ -38,6 +41,32 @@
                     <h1 class="text-start">
                         Invoice List
                     </h1>
+                    @if (Model != null && Model.Any())
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Invoice ID</th>
+                                    <th>Ticket Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var invoice in Model)
+                                {
+                                    <tr>                                        
+                                        <td>@($"INV100{invoice.Id}")</td>
+                                        <td>@invoice.TicketPrice</td>
+                                        <td>@invoice.StatusName</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No invoices found.</p>
+                    }
                 </div>
 
             </div>

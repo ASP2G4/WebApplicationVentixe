@@ -1,0 +1,81 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "WebApplicationVentixe.Protos.Invoice";
+
+package invoice;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service InvoiceService{
+	rpc CreateInvoice (CreateInvoiceRequest) returns (CreateInvoiceResponse);
+	rpc GetInvoices (google.protobuf.Empty) returns (GetInvoiceResponse);
+	rpc GetInvoiceById (GetInvoiceByIdRequest) returns (GetInvoiceByIdResponse);
+	rpc UpdateInvoice (UpdateInvoiceRequest) returns (UpdateInvoiceResponse);
+	rpc DeleteInvoice (DeleteInvoiceRequest) returns (DeleteInvoiceResponse);
+}
+
+message Invoice {
+	int32 id = 1;
+	google.protobuf.Timestamp start_date = 2;
+	google.protobuf.Timestamp end_date = 3;
+	string user_name = 4;
+	string user_email = 5;
+	string user_address = 6;
+	string user_phone = 7;
+	string company_name = 8;
+	string company_email = 9;
+	string company_address = 10;
+	string company_phone = 11;
+	string status_name = 12;
+	string ticket_category = 13;
+	string ticket_price = 14;
+	int32 amount_of_tickets = 15;
+}
+
+message CreateInvoiceRequest {
+	google.protobuf.Timestamp start_date = 1;
+	google.protobuf.Timestamp end_date = 2;
+	string user_id = 3;
+	string company_id = 4;
+	int32 status_id = 5;
+	string invoice_details_id = 6;
+}
+
+message CreateInvoiceResponse {
+	int32 id = 1;
+	google.protobuf.Timestamp start_date = 2;
+	google.protobuf.Timestamp end_date = 3;
+	string user_id = 4;
+	string company_id = 5;
+	int32 status_id = 6;
+	string invoice_details_id = 7;
+}
+
+message GetInvoiceResponse {
+  repeated Invoice invoices = 1;
+}
+
+message GetInvoiceByIdRequest {
+  int32 id = 1;
+}
+
+message GetInvoiceByIdResponse {
+  Invoice invoice = 1;
+}
+
+message UpdateInvoiceRequest {
+  Invoice invoice = 1;
+}
+
+message UpdateInvoiceResponse {
+  bool success = 1;
+}
+
+message DeleteInvoiceRequest {
+  int32 id = 1;
+}
+
+message DeleteInvoiceResponse {
+  bool success = 1;
+}

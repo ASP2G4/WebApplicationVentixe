@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationVentixe.Protos;
+using WebApplicationVentixe.Protos.Invoice;
+using WebApplicationVentixe.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +20,18 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSingleton(new ServiceBusClient(builder.Configuration["AzureServiceBusSettings:ConnectionString"]));
 builder.Services.AddScoped<IVerificationService, VerificationService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<InvoiceGrpcClientService>();
 
 
 builder.Services.AddGrpcClient<ProfileHandler.ProfileHandlerClient>(options =>
 {
     var grpcUrl = builder.Configuration["GrpcSettings:ProfileHandlerUrl"];
+    options.Address = new Uri(grpcUrl);
+});
+
+builder.Services.AddGrpcClient<InvoiceService.InvoiceServiceClient>(options =>
+{
+    var grpcUrl = builder.Configuration["GrpcSettings:InvoiceServiceUrl"];
     options.Address = new Uri(grpcUrl);
 });
 
