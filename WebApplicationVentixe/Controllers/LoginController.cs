@@ -1,4 +1,5 @@
 ﻿using Authentication.Entities;
+using Authentication.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -6,10 +7,13 @@ using WebApplicationVentixe.Models.Login;
 
 namespace WebApplicationVentixe.Controllers
 {
-    public class LoginController(SignInManager<AccountUser> signInManager, UserManager<AccountUser> userManager) : Controller
+    public class LoginController(SignInManager<AccountUser> signInManager, UserManager<AccountUser> userManager, IJwtManager jwtHandler) : Controller
     {
         private readonly SignInManager<AccountUser> _signInManager = signInManager;
         private readonly UserManager<AccountUser> _userManager = userManager;
+        private readonly IJwtManager _jwtHandler = jwtHandler;
+
+
         public IActionResult Index(string returnUrl = "~/")
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -25,10 +29,21 @@ namespace WebApplicationVentixe.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
-   
                 var respone = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                if (respone.Succeeded)
+
+                if (respone.Succeeded && user != null)
                 {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    var role = roles.FirstOrDefault();
+
+                    var success = await _jwtHandler.SetJwtAsync(user.Id, user.UserName!, role!, user.Email!, HttpContext);
+
+                    if (!success)
+                    {
+                        ViewBag.ErrorMessage = "Login succeeded, but failed to generate JWT token ";
+                        await _signInManager.SignOutAsync();
+                        return View(model);
+                    }
                     return LocalRedirect(ViewBag.ReturnUrl);
                 }
             }
@@ -40,7 +55,8 @@ namespace WebApplicationVentixe.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            _jwtHandler.RemoveCookieAndSession(HttpContext);
+            return RedirectToAction("Index", "Login");
         }
 
         [HttpGet]
@@ -106,6 +122,20 @@ namespace WebApplicationVentixe.Controllers
             var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (signInResult.Succeeded)
             {
+                var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+                if (user != null)
+                {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    var role = roles.FirstOrDefault();
+                    var success = await _jwtHandler.SetJwtAsync(user.Id, user.UserName!, role!, user.Email!, HttpContext);
+
+                    if (!success)
+                    {
+                        ViewBag.ErrorMessage = "Login succeeded, but failed to generate JWT token";
+                        await _signInManager.SignOutAsync();
+                        return View("Index");
+                    }
+                }
                 return LocalRedirect(returnUrl);
             }
             else
@@ -129,6 +159,17 @@ namespace WebApplicationVentixe.Controllers
 
                     await _userManager.AddLoginAsync(user, info);
                     await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    var roles = await _userManager.GetRolesAsync(user);
+                    var role = roles.FirstOrDefault();
+                    var success = await _jwtHandler.SetJwtAsync(user.Id, user.UserName!, role!, user.Email!, HttpContext);
+
+                    if (!success)
+                    {
+                        ViewBag.ErrorMessage = "Login succeeded, but failed to generate JWT token";
+                        await _signInManager.SignOutAsync();
+                        return View("Index");
+                    }
                     return LocalRedirect(returnUrl);
                 }
 
