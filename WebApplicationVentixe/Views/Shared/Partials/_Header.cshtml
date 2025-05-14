@@ -15,7 +15,7 @@
                 @ViewData["Title"]
             </h1>
             <p class="mb-0">
-                Hello "Namn", welcome back! @* Ändra så det blir breadcrumbs och bara står titlen när man går till andra delar än Dashboard *@
+                Hello @email, welcome back! @* Ändra så det blir breadcrumbs och bara står titlen när man går till andra delar än Dashboard *@
             </p>
         </div>
 
@@ -31,11 +31,13 @@
             </form>     
             
             <div class="d-flex flex-column justify-content-center d-none d-md-flex">
-				<h5 class="mb-0">@email</h5>
-                <p class="mb-0">@role</p>
-                <p class="mb-0">@provider</p>
+				<p class="mb-0">@email</p>
+                <p class="mb-0 text-muted">@role</p>
+                <p class="mb-0 text-muted">@provider</p>
             </div>
-			<img src="~/Images/Avatar.svg" alt="User Icon" class="rounded-circle ms-1 me-1 m-md-1" style="width: 40px; height: 40px; object-fit: cover;"> @* flytta till CSS fil *@
+            <div>
+                <a asp-controller="Profile" asp-action="Index" class="btn btn-primary"><span>Edit Profile</span></a>
+            </div>
         </div>
     </div>
 

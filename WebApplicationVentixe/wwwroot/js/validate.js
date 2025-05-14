@@ -5,6 +5,8 @@
     const errorMessage = document.getElementById("error-message");
     const emailError = document.querySelector("[data-valmsg-for='Email']");
     const passwordError = document.querySelector("[data-valmsg-for='Password']");
+    const confirmPasswordInput = document.getElementById("confirm-password-input");
+    const confirmPasswordError = document.querySelector("[data-valmsg-for='ConfirmPassword']");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -40,13 +42,30 @@
     }
 
     emailInput?.addEventListener("input", function () {
-        hideErrorMessage();
-        hideErrorMessageForField(emailError);
+        if (errorMessage) {
+            hideErrorMessage();
+        }
+        if (emailError) {
+            hideErrorMessageForField(emailError);
+        }
     });
 
     passwordInput?.addEventListener("input", function () {
-        hideErrorMessage();
-        hideErrorMessageForField(passwordError);
+        if (errorMessage) {
+            hideErrorMessage();
+        }
+        if (passwordError) {
+            hideErrorMessageForField(passwordError);
+        }
+    });
+
+    confirmPasswordInput?.addEventListener("input", function () {
+        if (errorMessage) {
+            hideErrorMessage();
+        }
+        if (confirmPasswordError) {
+            hideErrorMessageForField(confirmPasswordError);
+        }
     });
 
     form?.addEventListener("submit", function (event) {

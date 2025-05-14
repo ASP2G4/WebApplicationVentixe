@@ -33,10 +33,7 @@ namespace WebApplicationVentixe.Controllers
 
                 if (respone.Succeeded && user != null)
                 {
-                    var roles = await _userManager.GetRolesAsync(user);
-                    var role = roles.FirstOrDefault();
-
-                    var success = await _jwtHandler.SetJwtAsync(user.Id, user.UserName!, role!, user.Email!, HttpContext);
+                    var success = await TrySetJwtAsync(user);
 
                     if (!success)
                     {
@@ -124,10 +121,8 @@ namespace WebApplicationVentixe.Controllers
             {
                 var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
                 if (user != null)
-                {
-                    var roles = await _userManager.GetRolesAsync(user);
-                    var role = roles.FirstOrDefault();
-                    var success = await _jwtHandler.SetJwtAsync(user.Id, user.UserName!, role!, user.Email!, HttpContext);
+                {      
+                    var success = await TrySetJwtAsync(user);
 
                     if (!success)
                     {
@@ -139,48 +134,64 @@ namespace WebApplicationVentixe.Controllers
                 return LocalRedirect(returnUrl);
             }
             else
-            {
-                string email = info.Principal.FindFirstValue(ClaimTypes.Email)!;
-                string username = $"ext_{info.LoginProvider.ToLower()}_{email}";
+            {   
+                var success = await CreateAndLoginExternal(info);
 
-                var user = new AccountUser
+                if (!success)
                 {
-                    UserName = username,
-                    Email = email,
-                    EmailConfirmed = true,
-                };
-
-                var identityResult = await _userManager.CreateAsync(user);
-                if (identityResult.Succeeded) 
-                {
-                    var roleAssignmentResult = await _userManager.AddToRoleAsync(user, "User");
-                    if (!roleAssignmentResult.Succeeded)
-                        return RedirectToAction("Index");
-
-                    await _userManager.AddLoginAsync(user, info);
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
-                    var roles = await _userManager.GetRolesAsync(user);
-                    var role = roles.FirstOrDefault();
-                    var success = await _jwtHandler.SetJwtAsync(user.Id, user.UserName!, role!, user.Email!, HttpContext);
-
-                    if (!success)
-                    {
-                        ViewBag.ErrorMessage = "Login succeeded, but failed to generate JWT token";
-                        await _signInManager.SignOutAsync();
-                        return View("Index");
-                    }
-                    return LocalRedirect(returnUrl);
+                    ViewBag.ErrorMessage = "Login succeeded, but failed to generate JWT token";
+                    await _signInManager.SignOutAsync();
+                    return View("Index");
                 }
+                return LocalRedirect(returnUrl);
 
-                foreach (var error in identityResult.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-
-                return RedirectToAction("Index");
             }
 
+        }
+
+        private async Task<bool> CreateAndLoginExternal(ExternalLoginInfo info)
+        {
+            string email = info.Principal.FindFirstValue(ClaimTypes.Email)!;
+            string username = $"ext_{info.LoginProvider.ToLower()}_{email}";
+
+            var user = new AccountUser
+            {
+                UserName = username,
+                Email = email,
+                EmailConfirmed = true,
+            };
+
+            var identityResult = await _userManager.CreateAsync(user);
+            if (!identityResult.Succeeded)
+                return false;
+
+            var roleAssignmentResult = await _userManager.AddToRoleAsync(user, "User");
+            if (!roleAssignmentResult.Succeeded)
+                return false;
+
+            await _userManager.AddLoginAsync(user, info);
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            var success = await TrySetJwtAsync(user);
+            return success;
+
+        }
+
+        private async Task<string?> GetUserRoleAsync(AccountUser user)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            return roles.FirstOrDefault();
+        }
+
+        private async Task<bool> TrySetJwtAsync(AccountUser user)
+        {
+            var role = await GetUserRoleAsync(user);
+            if (role == null)
+                return false;
+            var success = await _jwtHandler.SetJwtAsync(user.Id, user.UserName!, role, user.Email!, HttpContext);
+            if (!success)
+                await _signInManager.SignOutAsync();
+            return success;
         }
     }
 }
