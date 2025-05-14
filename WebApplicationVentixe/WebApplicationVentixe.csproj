@@ -15,6 +15,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,6 +25,7 @@
 	<ItemGroup>
 		<Protobuf Include="Protos\profile.proto" GrpcServices="Client" />
 		<Protobuf Include="Protos\invoice.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\jwt.proto" GrpcServices="Client" />
 	</ItemGroup>
 
   <ItemGroup>

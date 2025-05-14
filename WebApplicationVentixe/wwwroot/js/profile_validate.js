@@ -19,6 +19,14 @@
 
     fields.forEach(field => {
         if (field.input && field.error) {
+            if (field.input.value && field.input.value.trim() !== "") {
+                hideErrorMessageForField(field.error);
+            }
+        }
+    });
+
+    fields.forEach(field => {
+        if (field.input && field.error) {
             field.input.addEventListener("input", function () {
                 hideErrorMessageForField(field.error);
             });

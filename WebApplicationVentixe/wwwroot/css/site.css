@@ -74,6 +74,12 @@
     --button-primary-hover-text-color: var(--gray-10);
     --button-primary-hover-border-color: var(--primary-90);
     --button-primary-hover-background-color: var(--primary-90);
+    --button-danger-text-color: var(--gray-10);
+    --button-danger-border-color: var(--yellow-100);
+    --button-danger-background-color: var(--yellow-100);
+    --button-danger-hover-text-color: var(--cool-gray-100);
+    --button-danger-hover-border-color: var(--yellow-90);
+    --button-danger-hover-background-color: var(--yellow-90);
     --button-secondary-text-color: var(--secondary-100);
     --button-secondary-border-color: var(--cool-gray-10);
     --button-secondary-background-color: var(--cool-gray-10);
@@ -206,6 +212,19 @@ a {
         color: var(--button-primary-hover-text-color);
         border: 1px solid var(--button-primary-hover-border-color);
         background-color: var(--button-primary-hover-background-color);
+        transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    }
+
+.btn-danger {
+    color: var(--button-danger-text-color);
+    border: 1px solid var(--button-danger-border-color);
+    background-color: var(--button-danger-background-color);
+}
+
+    .btn-danger:hover {
+        color: var(--button-danger-hover-text-color);
+        border: 1px solid var(--button-danger-hover-border-color);
+        background-color: var(--button-danger-hover-background-color);
         transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
     }
 

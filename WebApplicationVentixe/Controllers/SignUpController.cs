@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplicationVentixe.Models.SignUp;
 using WebApplicationVentixe.Protos;
+using WebApplicationVentixe.Mappers;
 
 namespace WebApplicationVentixe.Controllers
 {
@@ -157,22 +158,7 @@ namespace WebApplicationVentixe.Controllers
                 return View(model);
             }
 
-            var createProfileRequest = new CreateProfileRequest
-            {
-                Profile = new Profile
-                {
-                    UserId = userId,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    PhoneNumber = model.PhoneNumber,
-                    Address = new ProfileAddress
-                    {
-                        StreetName = model.StreetName,
-                        PostalCode = model.PostalCode,
-                        City = model.City
-                    }
-                }
-            };
+            var createProfileRequest = model.MapToCreateProfileRequest(userId);
 
             var response = await _profileGrpcClient.CreateProfileAsync(createProfileRequest);
 
