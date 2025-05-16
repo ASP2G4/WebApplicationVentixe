@@ -1,0 +1,46 @@
+﻿@model List<Invoice>
+<h1 class="text-start">Invoice List</h1>
+
+<div class="row">
+    <div class="input-group">
+        <input type="search" class="form-control" placeholder="Search" aria-label="Search">
+
+        <span class="input-group-text">
+            <i class="bi bi-search"></i>
+        </span>
+
+        <button class="btn btn-primary ms-2">Add</button>
+        <button class="btn btn-secondary ms-2">Filter</button>
+    </div>
+</div>
+
+
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Invoice ID</th>
+                <th>Ticket Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var invoice in Model)
+            {
+                <tr>
+                    <td>@($"INV100{invoice.Id}")</td>
+                    <td>@invoice.TicketPrice</td>
+                    <td>@invoice.StatusName</td>
+                    <td>@invoice.StartDate.ToDateTime()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No invoices found.</p>
+}

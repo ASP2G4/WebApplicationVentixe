@@ -1,80 +1,19 @@
-﻿@using WebApplicationVentixe.Protos.Invoice;
-@model List<Invoice>
+﻿@model List<Invoice>
 
 <div class="container-fluid mt-3">
     <div class="row">
-
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="row">
+                @await Html.PartialAsync("~/Views/Shared/Partials/InvoicePartials/InvoiceStatusOverview.cshtml", Model)
+            </div>
 
-                <div class="col-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3>Paid</h3>
-                            <p>1000</p>
-                            <small>Last month: 1430</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3>Unpaid</h3>
-                            <p>230</p>
-                            <small>Last month: 315</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3>Overdue</h3>
-                            <p>80</p>
-                            <small>Last month: 43</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <h1 class="text-start">
-                        Invoice List
-                    </h1>
-                    @if (Model != null && Model.Any())
-                    {
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Invoice ID</th>
-                                    <th>Ticket Price</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var invoice in Model)
-                                {
-                                    <tr>                                        
-                                        <td>@($"INV100{invoice.Id}")</td>
-                                        <td>@invoice.TicketPrice</td>
-                                        <td>@invoice.StatusName</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <p>No invoices found.</p>
-                    }
-                </div>
-
+            <div class="mt-4">
+                @await Html.PartialAsync("~/Views/Shared/Partials/InvoicePartials/InvoiceList.cshtml", Model)
             </div>
         </div>
 
-        <div class="col-8 d-flex align-items-start">
-            <h1>Invoice Details</h1>
+        <div class="col-md-8">
+            @await Html.PartialAsync("~/Views/Shared/Partials/InvoicePartials/InvoiceDetails.cshtml", Model)
         </div>
-
     </div>
 </div>
