@@ -1,4 +1,4 @@
-﻿@model List<WebApplicationVentixe.Protos.Invoice.Invoice>
+﻿@model IEnumerable<WebApplicationVentixe.Models.Invoice.InvoiceViewModel>
 
 @{
     var paidCount = Model.Count(i => i.StatusName == "Paid");
