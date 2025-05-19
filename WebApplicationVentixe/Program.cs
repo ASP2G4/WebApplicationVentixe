@@ -35,6 +35,7 @@ builder.Services.AddGrpcClient<InvoiceService.InvoiceServiceClient>(options =>
     var grpcUrl = builder.Configuration["GrpcSettings:InvoiceServiceUrl"];
     options.Address = new Uri(grpcUrl!);
 });
+
 builder.Services.AddGrpcClient<GrpcJwtService.Protos.JwtTokenService.JwtTokenServiceClient>(options =>
 {
     var grpcUrl = builder.Configuration["GrpcSettings:JwtTokenServiceUrl"];
@@ -61,11 +62,13 @@ builder.Services.ConfigureApplicationCookie(x =>
     x.Cookie.SameSite = SameSiteMode.None;
     x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 })
 .AddCookie()
+
 .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -79,6 +82,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]!))
     };
 })
+
 .AddGitHub(options =>
 {
     options.ClientId = builder.Configuration["Authentication:GitHub:ClientId"]!;

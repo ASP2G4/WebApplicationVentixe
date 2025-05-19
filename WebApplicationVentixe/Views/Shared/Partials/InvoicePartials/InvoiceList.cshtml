@@ -1,18 +1,25 @@
-﻿@model List<Invoice>
+﻿@using WebApplicationVentixe.Models.Invoice
+@model IEnumerable<WebApplicationVentixe.Models.Invoice.InvoiceViewModel>
+
 <h1 class="text-start">Invoice List</h1>
 
-<div class="row">
+@{
+    var input = ViewBag.Input as string ?? "";
+}
+
+<form method="get" class="row mb-3">
     <div class="input-group">
-        <input type="search" class="form-control" placeholder="Search" aria-label="Search">
-
-        <span class="input-group-text">
-            <i class="bi bi-search"></i>
-        </span>
-
-        <button class="btn btn-primary ms-2">Add</button>
-        <button class="btn btn-secondary ms-2">Filter</button>
+        <input type="search" name="input" class="form-control" placeholder="Search for Id" value="@input" />
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <button type="submit" class="btn btn-primary ms-2">Search</button>
     </div>
-</div>
+</form>
+
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">No matching invoices found.</div>
+}
 
 
 
@@ -27,16 +34,20 @@
             </tr>
         </thead>
 
-        <tbody>
+        <tbody>       
             @foreach (var invoice in Model)
             {
-                <tr>
-                    <td>@($"INV100{invoice.Id}")</td>
-                    <td>@invoice.TicketPrice</td>
-                    <td>@invoice.StatusName</td>
-                    <td>@invoice.StartDate.ToDateTime()</td>
-                </tr>
-            }
+                    <tr>
+                        <td>
+                            @invoice.InvoiceNumber <br/> 
+                            <small> 
+                                @invoice.StartDate                   
+                            </small>
+                        </td>
+                        <td>bookings pris</td>
+                        <td> @invoice.StatusName</td>
+                    </tr>     
+            }            
         </tbody>
     </table>
 }
