@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplicationVentixe.Models.Invoice;
+using WebApplicationVentixe.Protos.Invoice;
 using WebApplicationVentixe.Services;
 
 namespace WebApplicationVentixe.Controllers
@@ -29,6 +30,38 @@ namespace WebApplicationVentixe.Controllers
             }
 
             return View(invoiceDto);
+        }
+
+        public async Task<IActionResult> DetailsPartial(int id)
+        {
+            var invoice = await _invoiceService.GetInvoiceByIdAsync(id);
+
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+
+            var invoiceDto = new InvoiceDetailsViewModel
+            {
+                Id = invoice.Id,
+                StartDate = invoice.StartDate.ToDateTime(),
+                EndDate = invoice.EndDate.ToDateTime(),
+                UserName = "Username",
+                UserAddress = "User Address",
+                UserEmail = "User Email",
+                UserPhone = "User Phone",
+                CompanyName = "Company Name",
+                CompanyAddress = "Company Address",
+                CompanyEmail = "Company Email",
+                CompanyPhone = "Company Phone",
+                TicketCategory = "Ticket Category",
+                TicketPrice = 120,
+                TicketCount = 2,
+                StatusName = invoice.StatusName
+            };
+
+
+            return PartialView("~/Views/Shared/Partials/InvoicePartials/InvoiceDetails.cshtml", invoiceDto);
         }
     }
 }

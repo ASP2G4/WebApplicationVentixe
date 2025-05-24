@@ -34,20 +34,23 @@
             </tr>
         </thead>
 
-        <tbody>       
+        <tbody>
             @foreach (var invoice in Model)
             {
-                    <tr>
-                        <td>
-                            @invoice.InvoiceNumber <br/> 
-                            <small> 
-                                @invoice.StartDate                   
-                            </small>
-                        </td>
-                        <td>bookings pris</td>
-                        <td> @invoice.StatusName</td>
-                    </tr>     
-            }            
+                <tr>
+                    <td>
+                        <a href="#"
+                           class="text-decoration-none load-invoice-details"
+                           data-id="@invoice.Id">
+                            @invoice.InvoiceNumber
+                        </a>
+                        <br />
+                        <small>@invoice.StartDate</small>
+                    </td>
+                    <td>bookings pris</td>
+                    <td>@invoice.StatusName</td>
+                </tr>
+            }
         </tbody>
     </table>
 }
