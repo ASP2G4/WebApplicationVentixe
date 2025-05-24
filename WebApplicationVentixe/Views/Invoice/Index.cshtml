@@ -13,7 +13,33 @@
         </div>
 
         <div class="col-md-8">
-            @await Html.PartialAsync("~/Views/Shared/Partials/InvoicePartials/InvoiceDetails.cshtml", Model)
+            <div id="invoice-details">
+                <p>Select an invoice from the list to view the details.</p>
+            </div>
         </div>
     </div>
 </div>
+
+
+@* Scripts är skapad med hjälp av AI: *@
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.load-invoice-details').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const invoiceId = this.getAttribute('data-id');
+
+                    fetch(`/Invoice/DetailsPartial?id=${invoiceId}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById("invoice-details").innerHTML = html;
+                        })
+                        .catch(error => {
+                            console.error('Error loading invoice details:', error);
+                        });
+                });
+            });
+        });
+    </script>
+}

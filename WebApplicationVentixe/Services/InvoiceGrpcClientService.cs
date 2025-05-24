@@ -10,8 +10,8 @@ public class InvoiceGrpcClientService(InvoiceService.InvoiceServiceClient client
 
     public async Task<List<Invoice>> GetInvoicesAsync()
     {        
-            var response = await _client.GetInvoicesAsync(new Empty());
-            return response.Invoices.ToList();      
+        var response = await _client.GetInvoicesAsync(new Empty());
+        return response.Invoices.ToList();
     }
 
     public async Task<Invoice?> GetInvoiceByIdAsync(int id)
