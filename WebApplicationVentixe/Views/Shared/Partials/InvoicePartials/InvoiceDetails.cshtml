@@ -1,0 +1,91 @@
+﻿@model WebApplicationVentixe.Models.Invoice.InvoiceDetailsViewModel
+
+<div class="card">
+    <div class="card-body">
+        <div>
+            <div class="row mb-md-5">
+                <div class="col-md-6 text-start">
+                    <strong>
+                        Invoice Details
+                    </strong>
+                </div>
+                <div class="col-md-6 text-end">
+                    <strong>
+                        Download
+                    </strong>
+
+                    <button>
+                        Left arrow
+                    </button>
+                    <button>
+                        right arrow
+                    </button>						
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>#@Model.InvoiceNumber</h3>
+                    <strong>@Model.StatusName</strong>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p><strong>Issued Date:</strong>@Model.StartDate</p>
+                    <p><strong>Due Date:</strong>@Model.EndDate</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 text-start">
+                    <div>
+                        <small>Bill from</small>
+                    </div>
+                    <div class="">
+                        <p>@Model.CompanyName</p>
+                        <p>@Model.CompanyAddress</p>
+                        <p>@Model.CompanyPhone</p>
+                        <p>@Model.CompanyEmail</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 text-end">
+                    <div>
+                        <small>Bill to</small>
+                    </div>
+                    <div class="">
+                        <p>@Model.UserName</p>
+                        <p>@Model.UserAddress</p>
+                        <p>@Model.UserPhone</p>
+                        <p>@Model.UserEmail</p>
+                    </div>
+                </div>
+
+                <div>
+                    <strong>
+                        Ticket Details
+                    </strong>                    
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Ticket Category</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>                        
+                         <tr>
+                            <td>@Model.TicketCategory</td>
+                            <td>@Model.TicketPrice</td>
+                            <td>@Model.TicketCount</td>
+                            <td>@(Model.TicketCount * Model.TicketPrice)</td>
+                        </tr>                   
+                    </tbody>
+                </table>
+            </div>
+        </div>        
+    </div>
+</div>

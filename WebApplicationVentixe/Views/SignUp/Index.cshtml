@@ -1,0 +1,33 @@
+﻿@model SignUpViewModel
+@{
+    ViewData["Title"] = "Create Account";
+    Layout = "_AuthLayout";
+}
+
+<div id="signup" class="card mx-auto mt-5">
+    <div class="card-header text-center mt-3">
+        <h2 class="h4 mb-2">Enter your Email Address</h2>
+        <p class="text-muted">You can register an account here or use one of our third-party logins.</p>
+        @if (!string.IsNullOrEmpty(ViewBag?.ErrorMessage))
+        {
+            <div id="error-message" class="text-danger">
+                @ViewBag?.ErrorMessage
+            </div>
+        }
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="Index" asp-controller="SignUp" novalidate>
+            <div class="mb-3">
+                <div class="additional-info right"><a asp-action="Index" asp-controller="SignUp">Resend verification code? </a></div>
+                <input asp-for="Email" class="form-control" id="email-input" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Continue</button>
+        </form>
+    </div>
+    <div class="card-footer text-center">
+        <p class="mb-0">Already have an account yet? <a asp-action="Index" asp-controller="Login">Log In</a></p>
+    </div>
+</div>
+
+﻿<script src="/js/validate.js" asp-append-version="true"></script>

@@ -1,0 +1,53 @@
+﻿@model ProfileViewModel
+@{
+    ViewData["Title"] = "Edit Account Profile";
+    Layout = "_AuthLayout";
+}
+<div id="signup" class="card mx-auto mt-5 border-0">
+    <div class="card-header text-center mt-3">
+        <h2 class="h4 mb-2">Edit Your profile information</h2>
+        <p class="text-muted">Add or edit your profile information.</p>
+        @if (!string.IsNullOrEmpty(ViewBag?.Message))
+        {
+            <div id="error-message" class="text-danger">
+                @ViewBag?.Message
+            </div>
+        }
+
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="Index" asp-controller="Profile" novalidate>
+            <div class="mb-3">
+                <input asp-for="FirstName" class="form-control" id="firstname" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="LastName" class="form-control" id="lastname" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="PhoneNumber" class="form-control" id="phonenumber" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="StreetName" class="form-control" id="streetname" />
+                <span asp-validation-for="StreetName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="PostalCode" class="form-control" id="postalcode" />
+                <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="City" class="form-control" id="city" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <button type="submit" name="action" value="save" class="btn btn-primary w-100 mb-3">Save</button>
+            <button type="submit" name="action" value="delete" class="btn btn-danger w-100 mb-3">Delete account</button>
+        </form>
+        <div class="card-footer text-center">
+            <p class="mb-0"><a asp-action="Index" asp-controller="Home">Return to homepage!</a></p>
+        </div>
+    </div>
+</div>
+
+﻿<script src="/js/profile_validate.js" asp-append-version="true"></script>

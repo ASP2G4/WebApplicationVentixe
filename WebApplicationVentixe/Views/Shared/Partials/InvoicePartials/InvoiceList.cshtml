@@ -1,0 +1,60 @@
+﻿@using WebApplicationVentixe.Models.Invoice
+@model IEnumerable<WebApplicationVentixe.Models.Invoice.InvoiceViewModel>
+
+<h1 class="text-start">Invoice List</h1>
+
+@{
+    var input = ViewBag.Input as string ?? "";
+}
+
+<form method="get" class="row mb-3">
+    <div class="input-group">
+        <input type="search" name="input" class="form-control" placeholder="Search for Id" value="@input" />
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <button type="submit" class="btn btn-primary ms-2">Search</button>
+    </div>
+</form>
+
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">No matching invoices found.</div>
+}
+
+
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Invoice ID</th>
+                <th>Ticket Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var invoice in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="#"
+                           class="text-decoration-none load-invoice-details"
+                           data-id="@invoice.Id">
+                            @invoice.InvoiceNumber
+                        </a>
+                        <br />
+                        <small>@invoice.StartDate</small>
+                    </td>
+                    <td>bookings pris</td>
+                    <td>@invoice.StatusName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No invoices found.</p>
+}

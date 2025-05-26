@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WebApplicationVentixe.Models.Invoice.InvoiceViewModel>
+
+@{
+    var paidCount = Model.Count(i => i.StatusName == "Paid");
+    var unpaidCount = Model.Count(i => i.StatusName == "Unpaid");
+    var overdueCount = Model.Count(i => i.StatusName == "Overdue");
+}
+
+<div class="col-4 mb-3">
+    <div class="card h-100">
+        <div class="card-body">
+            <h3>Paid</h3>
+            <p>@paidCount</p>
+            <small>Last month: @paidCount</small>
+        </div>
+    </div>
+</div>
+
+<div class="col-4 mb-3">
+    <div class="card h-100">
+        <div class="card-body">
+            <h3>Unpaid</h3>
+            <p>@unpaidCount</p>
+            <small>Last month: 0</small>
+        </div>
+    </div>
+</div>
+
+<div class="col-4 mb-3">
+    <div class="card h-100">
+        <div class="card-body">
+            <h3>Overdue</h3>
+            <p>@overdueCount</p>
+            <small>Last month: 0</small>
+        </div>
+    </div>
+</div>

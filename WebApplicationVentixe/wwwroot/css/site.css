@@ -4,23 +4,108 @@
     box-sizing: border-box;
 }
 
-* {
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
+:root {
+    --font: "Inter", sans-serif;
+    --primary-100: #F26CF9;
+    --primary-90: #F589FA;
+    --primary-50: #FCD3FE;
+    --primary-40: #FCE2FE;
+    --primary-30: #FDEDFE;
+    --secondary-110: #1C2346;
+    --secondary-100: #37437D;
+    --secondary-90: #5562A2;
+    --secondary-70: #707DBF;
+    --secondary-60: #707DBF;
+    --secondary-50: #D3DAF9;
+    --yellow-100: #FFCA39;
+    --yellow-90: #FFEFC3;
+    --gray-10: #FFFFFF;
+    --gray-20: #F7F7F7;
+    --gray-30: #EDEDED;
+    --gray-40: #E0E0E1;
+    --gray-50: #C3C3C4;
+    --gray-60: #9F9FA1;
+    --gray-70: #777779;
+    --gray-80: #636365;
+    --gray-90: #434345;
+    --gray-100: #1E1E20;
+    --cool-gray-10: #EEEFFF;
+    --cool-gray-20: #E4E5F5;
+    --cool-gray-30: #DDDEED;
+    --cool-gray-40: #D1D2E0;
+    --cool-gray-50: #B0B1BD;
+    --cool-gray-60: #8F8F99;
+    --cool-gray-70: #72737A;
+    --cool-gray-80: #56565C;
+    --cool-gray-90: #39393D;
+    --cool-gray-100: #131314;
+    --headline-color: var(--secondary-100);
+    --text-color: var(--gray-100);
+    --text-muted-color: var(--gray-60);
+    --background-color: var(--gray-10);
+    --nav-background-color: var(--cool-gray-20);
+    --header-background-color: var( --gray-20);
+    --main-background-color: var( --gray-20);
+    --footer-background-color: var( --gray-20);
+    --section-background-color: var(--gray-20);
+    --border-color: var(--gray-40);
+    --separator-border-color: var(--gray-40);
+    --separator-text-color: var(--gray-60);
+    --separator-background-color: var(--gray-10);
+    --link-color: var(--primary-100);
+    --link-hover-color: var(--primary-90);
+    --card-background-color: var(--gray-10);
+    --card-border-color: var(--gray-20);
+    --button-text-color: var(--gray-90);
+    --button-border-color: transparent;
+    --button-background-color: transparent;
+    --button-hover-text-color: var(--gray-90);
+    --button-hover-border-color: transparent;
+    --button-hover-background-color: transparent;
+    --button-link-text-color: var(--primary-100);
+    --button-link-border-color: transparent;
+    --button-link-background-color: transparent;
+    --button-link-hover-text-color: var(--primary-100);
+    --button-link-hover-border-color: transparent;
+    --button-link-hover-background-color: transparent;
+    --button-primary-text-color: var(--gray-10);
+    --button-primary-border-color: var(--primary-100);
+    --button-primary-background-color: var(--primary-100);
+    --button-primary-hover-text-color: var(--gray-10);
+    --button-primary-hover-border-color: var(--primary-90);
+    --button-primary-hover-background-color: var(--primary-90);
+    --button-danger-text-color: var(--gray-10);
+    --button-danger-border-color: var(--yellow-100);
+    --button-danger-background-color: var(--yellow-100);
+    --button-danger-hover-text-color: var(--cool-gray-100);
+    --button-danger-hover-border-color: var(--yellow-90);
+    --button-danger-hover-background-color: var(--yellow-90);
+    --button-secondary-text-color: var(--secondary-100);
+    --button-secondary-border-color: var(--cool-gray-10);
+    --button-secondary-background-color: var(--cool-gray-10);
+    --button-outline-text-color: var(--gray-90);
+    --button-outline-border-color: var(--gray-30);
+    --button-outline-background-color: transparent;
+    --input-background-color: var(--gray-10);
+    --input-border-color: var(--gray-40);
+    --input-border-focus-color: var(--primary-50);
+    --input-text-color: var(--gray-100);
+    --input-placeholder-color: var(--gray-50);
+    --checkbox-background-color: var(--gray-10);
+    --checkbox-border-color: var(--gray-40);
+    --checkbox-checked-background-color: var(--primary-100);
+    --checkbox-checked-border-color: var(--primary-100);
+    --checkbox-checked-text-color: var(--gray-10);
+}
+
+html, body {
+    margin: 0;
+    font-size: 16px;
     font-weight: 400;
     font-style: normal;
-}
-
-p {
-    font-family: "Inter", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-}
-@media(width >= 768px) {
-    p {
-        font-size: 16px;
-    }
-
+    font-family: var(--font);
+    color: var(--text-color);
+    background-color: var(--background-color);
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -84,4 +169,146 @@ h6, .h6 {
     h6, .h6 {
         font-size: 20px;
     }
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--link-hover-color) !important;
+    }
+
+.btn {
+    color: var(--button-text-color);
+    border: 1px solid var(--button-border-color);
+    background-color: var(--button-background-color);
+    transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    border-radius: 25px;
+    padding: 0.9rem 1.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+    .btn:hover {
+        text-decoration: none;
+        color: var(--button-text-color);
+        border: 1px solid var(--button-border-color);
+        background-color: var(--button-background-color);
+        transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    }
+
+.btn-cred {
+    color: var(--button-text-color);
+    border: 1px solid var(--button-border-color);
+    background-color: var(--button-background-color);
+    transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    border-radius: 25px;
+    padding: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 20px;
+}
+
+    .btn-cred:hover {
+        text-decoration: none;
+        color: var(--button-text-color);
+        border: 1px solid var(--button-border-color);
+        background-color: var(--button-background-color);
+        transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    }
+
+.btn-primary {
+    color: var(--button-primary-text-color);
+    border: 1px solid var(--button-primary-border-color);
+    background-color: var(--button-primary-background-color);
+}
+
+    .btn-primary:hover {
+        color: var(--button-primary-hover-text-color);
+        border: 1px solid var(--button-primary-hover-border-color);
+        background-color: var(--button-primary-hover-background-color);
+        transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    }
+
+.btn-danger {
+    color: var(--button-danger-text-color);
+    border: 1px solid var(--button-danger-border-color);
+    background-color: var(--button-danger-background-color);
+}
+
+    .btn-danger:hover {
+        color: var(--button-danger-hover-text-color);
+        border: 1px solid var(--button-danger-hover-border-color);
+        background-color: var(--button-danger-hover-background-color);
+        transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    }
+
+.btn-check:checked + .btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check) + .btn:active {
+    color: var(--button-primary-text-color);
+    border: 1px solid var(--button-primary-border-color);
+    background-color: var(--button-primary-background-color);
+}
+
+.form-check-input:checked {
+    background-color: var(--checkbox-checked-background-color);
+    border-color: var(--checkbox-checked-border-color);
+}
+
+.card .card-header {
+    padding: 1rem 2rem 1.5rem;
+    background-color: var(--card-background-color);
+    border: none;
+}
+
+.card .card-body {
+    padding: 1rem 2rem;
+    background-color: var(--card-background-color);
+}
+
+.card .card-footer {
+    padding: 2rem 2rem 1rem;
+    background-color: var(--card-background-color);
+    border: none;
+}
+
+#login {
+    width: 600px;
+}
+
+    #login.card .card-body {
+        padding: 0 3rem;
+    }
+
+#signup {
+    width: 600px;
+}
+
+    #signup.card .card-body {
+        padding: 0 3rem;
+    }
+.right {
+    float:right;
+}
+
+.verification-code-wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.verification-code-input {
+    font-size: 2em;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    border-radius: 12px;
+    outline: none;
+    color: var(--input-text-color);
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-background-color);
 }

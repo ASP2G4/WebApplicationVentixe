@@ -1,51 +1,45 @@
-﻿<div class="container-fluid mt-3">
+﻿@model IEnumerable<WebApplicationVentixe.Models.Invoice.InvoiceViewModel>
+
+<div class="container-fluid mt-3">
     <div class="row">
-
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="row">
+                @await Html.PartialAsync("~/Views/Shared/Partials/InvoicePartials/InvoiceStatusOverview.cshtml", Model)
+            </div>
 
-                <div class="col-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3>Paid</h3>
-                            <p>1000</p>
-                            <small>Last month: 1430</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3>Unpaid</h3>
-                            <p>230</p>
-                            <small>Last month: 315</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3>Overdue</h3>
-                            <p>80</p>
-                            <small>Last month: 43</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <h1 class="text-start">
-                        Invoice List
-                    </h1>
-                </div>
-
+            <div class="mt-4">
+                @await Html.PartialAsync("~/Views/Shared/Partials/InvoicePartials/InvoiceList.cshtml", Model)
             </div>
         </div>
 
-        <div class="col-8 d-flex align-items-start">
-            <h1>Invoice Details</h1>
+        <div class="col-md-8">
+            <div id="invoice-details">
+                <p>Select an invoice from the list to view the details.</p>
+            </div>
         </div>
-
     </div>
 </div>
+
+
+@* Scripts är skapad med hjälp av AI: *@
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.load-invoice-details').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const invoiceId = this.getAttribute('data-id');
+
+                    fetch(`/Invoice/DetailsPartial?id=${invoiceId}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById("invoice-details").innerHTML = html;
+                        })
+                        .catch(error => {
+                            console.error('Error loading invoice details:', error);
+                        });
+                });
+            });
+        });
+    </script>
+}
