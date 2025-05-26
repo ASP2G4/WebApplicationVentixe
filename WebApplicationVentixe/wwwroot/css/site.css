@@ -177,8 +177,7 @@ a {
 }
 
     a:hover {
-        color: var(--link-hover-color);
-        text-decoration: underline;
+        color: var(--link-hover-color) !important;
     }
 
 .btn {
@@ -195,6 +194,28 @@ a {
 }
 
     .btn:hover {
+        text-decoration: none;
+        color: var(--button-text-color);
+        border: 1px solid var(--button-border-color);
+        background-color: var(--button-background-color);
+        transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    }
+
+.btn-cred {
+    color: var(--button-text-color);
+    border: 1px solid var(--button-border-color);
+    background-color: var(--button-background-color);
+    transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    border-radius: 25px;
+    padding: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 20px;
+}
+
+    .btn-cred:hover {
         text-decoration: none;
         color: var(--button-text-color);
         border: 1px solid var(--button-border-color);

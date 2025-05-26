@@ -97,6 +97,7 @@ await SeedRoleData.SetRolesAsync(app);
 
 app.UseHsts();
 app.UseHttpsRedirection();
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
 app.UseRouting();
 
 app.UseSession();
