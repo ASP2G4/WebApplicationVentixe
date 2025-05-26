@@ -1,7 +1,7 @@
 ﻿@model ProfileViewModel
 @{
     ViewData["Title"] = "Edit Account Profile";
-    Layout = "_Layout";
+    Layout = "_AuthLayout";
 }
 <div id="signup" class="card mx-auto mt-5 border-0">
     <div class="card-header text-center mt-3">
@@ -44,6 +44,9 @@
             <button type="submit" name="action" value="save" class="btn btn-primary w-100 mb-3">Save</button>
             <button type="submit" name="action" value="delete" class="btn btn-danger w-100 mb-3">Delete account</button>
         </form>
+        <div class="card-footer text-center">
+            <p class="mb-0"><a asp-action="Index" asp-controller="Home">Return to homepage!</a></p>
+        </div>
     </div>
 </div>
 
