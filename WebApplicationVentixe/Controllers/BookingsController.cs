@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApplicationVentixe.Services;
 
-namespace WebApplicationVentixe.Controllers
+namespace WebApplicationVentixe.Controllers;
+
+public class BookingsController(BookingsService bookingsService) : Controller
 {
-    public class BookingsController : Controller
+    private readonly BookingsService _bookingsService = bookingsService;
+
+    public async Task<IActionResult> Index()
     {
-        public IActionResult Index()
-        {
-            ViewData["Title"] = "Bookings";
-            return View();
-        }
+        ViewData["Title"] = "Bookings";
+        var bookings = await _bookingsService.GetAllBookingsAsync();
+        return View(bookings);
     }
 }
