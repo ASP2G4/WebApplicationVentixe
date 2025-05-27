@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplicationVentixe.Models.Invoice;
-using WebApplicationVentixe.Protos.Invoice;
 using WebApplicationVentixe.Services;
 
 namespace WebApplicationVentixe.Controllers
 {
-    [Authorize (Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class InvoiceController(InvoiceGrpcClientService invoiceService) : Controller
     {
         private readonly InvoiceGrpcClientService _invoiceService = invoiceService;
@@ -27,7 +26,7 @@ namespace WebApplicationVentixe.Controllers
 
             if (!string.IsNullOrWhiteSpace(input))
             {
-                invoiceDto = invoiceDto.Where(i =>                     
+                invoiceDto = invoiceDto.Where(i =>
                     i.InvoiceNumber.Contains(input, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
@@ -64,6 +63,20 @@ namespace WebApplicationVentixe.Controllers
 
 
             return PartialView("~/Views/Shared/Partials/InvoicePartials/InvoiceDetails.cshtml", invoiceDto);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool success = await _invoiceService.DeleteInvoiceAsync(id);
+
+            if (success)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return BadRequest("Failed to delete invoice.");
         }
     }
 }
