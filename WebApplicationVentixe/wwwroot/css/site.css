@@ -312,3 +312,11 @@ a {
     border: 1px solid var(--input-border-color);
     background-color: var(--input-background-color);
 }
+
+.nav-link.active {
+    color: var(--bs-nav-link-hover-color) !important;
+}
+
+.nav-link:focus {
+    color: var(--bs-nav-link-hover-color) !important;
+}

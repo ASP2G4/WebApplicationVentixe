@@ -1,0 +1,39 @@
+﻿@using WebApplicationVentixe.Models.Booking
+@model IEnumerable<WebApplicationVentixe.Models.Booking.BookingViewModel>
+
+@* AI använt för html table struktur *@
+
+@if (Model == null || !Model.Any()){
+	<p>No bookings found</p>
+}
+else{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>User ID</th>
+                <th>Event ID</th>
+                <th>Tickets</th>
+                <th>Created At</th>
+                <th>Invoiced</th>
+                <th>Paid</th>
+                <th>Cancelled</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.Id</td>
+                    <td>@booking.UserId</td>
+                    <td>@booking.EventId</td>
+                    <td>@booking.Tickets</td>
+                    <td>@booking.CreatedAt.ToString("g")</td>
+                    <td>@(booking.Invoiced ? "Yes" : "No")</td>
+                    <td>@(booking.Paid ? "Yes" : "No")</td>
+                    <td>@(booking.Cancelled ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
