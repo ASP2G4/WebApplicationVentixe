@@ -1,0 +1,61 @@
+﻿@model WebApplicationVentixe.Models.Events.AddEventFormData
+
+<div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" asp-action="Create">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label asp-for="EventName" class="form-label">Event Name</label>
+                        <input asp-for="EventName" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="EventDescription" class="form-label">Event Description</label>
+                        <textarea asp-for="EventDescription" class="form-control"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="EventLocation" class="form-label">Event Location</label>
+                        <input asp-for="EventLocation" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="EventDate" class="form-label">Event Date</label>
+                        <input asp-for="EventDate" type="date" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="SilverTicketAmount" class="form-label">Silver Ticket Amount</label>
+                        <input asp-for="SilverTicketAmount" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="SilverTicketPrice" class="form-label" >Silver Ticket Price</label>
+                        <input asp-for="SilverTicketPrice" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="GoldTicketAmount" class="form-label">Gold Ticket Amount</label>
+                        <input asp-for="GoldTicketAmount" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="GoldTicketPrice" class="form-label">Gold Ticket Price</label>
+                        <input asp-for="GoldTicketPrice" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Create</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
