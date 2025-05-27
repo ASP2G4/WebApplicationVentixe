@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Amqp.Framing;
 using System.Net.WebSockets;
 using System.Text;
@@ -7,6 +8,7 @@ using WebApplicationVentixe.Models.Events;
 
 namespace WebApplicationVentixe.Controllers;
 
+[Authorize]
 public class EventController : Controller
 {
     private readonly HttpClient _httpClient;

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApplicationVentixe.Models.Invoice;
 using WebApplicationVentixe.Protos.Invoice;
 using WebApplicationVentixe.Services;
 
 namespace WebApplicationVentixe.Controllers
 {
+    [Authorize (Roles ="Admin")]
     public class InvoiceController(InvoiceGrpcClientService invoiceService) : Controller
     {
         private readonly InvoiceGrpcClientService _invoiceService = invoiceService;
