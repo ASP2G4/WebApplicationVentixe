@@ -19,13 +19,13 @@
             </p>
         </div>
 
-        <div class="align-items-center d-flex">
+        <div class="align-items-center d-flex ms-auto">
 
              <button class="btn d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#searchCollapse" aria-expanded="false" aria-controls="searchCollapse">
                 <img src="~/Images/ButtonSearch.svg" alt="Search">                
             </button>
 
-            <form class="d-flex d-none d-md-flex ms-3 me-3">
+            <form class="d-flex d-none d-md-flex ms-3 me-3">               
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>     
@@ -36,7 +36,7 @@
                 <p class="mb-0 text-muted">@provider</p>
             </div>
 
-            <a asp-controller="Profile" asp-action="Index" class="btn-cred btn-primary"><span style="white-space: nowrap;">Edit Profile</span></a>
+            <a asp-controller="Profile" asp-action="Index" class="btn-cred btn-primary"><span style="white-space: nowrap;"> <i class="bi bi-gear"></i> </span></a>
             
         </div>
     </div>
