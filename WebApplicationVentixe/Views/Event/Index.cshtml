@@ -4,71 +4,35 @@
 
 <div>
 
-    <div>
-        <div style="display: flex; justify-content:space-between;">
-            <h2>Events</h2>
+    <div style="padding: 10px;">
+        <div style="display: flex; gap: 40rem;">
+            
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal">Add Event</button>
         </div>
         
 
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; padding-top: 10px;">
             @foreach (var eventModel in Model)
             {
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
+                <img src="~/Images/ventixevent.jpg" class="card-img-top" alt="A ventixe event">
+                <div class="card-body" style="display: flex; flex-direction: column; height: 100%;">
                     <h5 class="card-title">@eventModel.EventName</h5>
                     <p class="card-text">@eventModel.EventDescription</p>
+                    <div style="margin-top: auto; display: flex; flex-direction: column;">
                     <p class="card-text">@eventModel.EventLocation</p>
                     <p class="card-text">@eventModel.EventDate.ToString("yyyy-MM-dd")</p>
-                    @* AI KNAPP  *@
+                    @* AI KNAPP *@
+                    <div style="display: flex; justify-content: flex-end;">
                     <a href="@Url.Action("EventDetails", "Event", new { id = eventModel.Id })" class="btn btn-primary">Mer info</a>
+                    </div>
+                    </div>
                 </div>
             </div>
-
             }
-
         </div>
     </div>
 </div>
 
 
-<div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="post" asp-action="Create">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="mb-3">
-                        <label class="form-label"></label>
-                        <input class="form-control" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label  class="form-label"></label>
-                        <input  class="form-control" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label  class="form-label"></label>
-                        <input  class="form-control" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label  class="form-label"></label>
-                        <input  type="date" class="form-control" />
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Create</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+@Html.Partial("~/Views/Shared/Partials/EventPartials/_AddEventModal.cshtml", new WebApplicationVentixe.Models.Events.AddEventFormData())
