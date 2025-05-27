@@ -6,32 +6,34 @@
     var overdueCount = Model.Count(i => i.StatusName == "Overdue");
 }
 
-<div class="col-4 mb-3">
-    <div class="card h-100">
-        <div class="card-body">
-            <h3>Paid</h3>
-            <p>@paidCount</p>
-            <small>Last month: @paidCount</small>
+<div class="d-flex flex-nowrap w-100">
+    <div class="m-2" style="flex: 1;">
+        <div class="card h-100">
+            <div class="card-body p-2">
+                <h4>Paid <i class="bi bi-patch-check"></i> </h4>
+                <p>@paidCount</p>
+                <small>Last month: @paidCount</small>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="col-4 mb-3">
-    <div class="card h-100">
-        <div class="card-body">
-            <h3>Unpaid</h3>
-            <p>@unpaidCount</p>
-            <small>Last month: 0</small>
+    <div class="m-2" style="flex: 1;">
+        <div class="card h-100">
+            <div class="card-body p-2">
+                <h4>Unpaid <i class="bi bi-x-octagon"></i> </h4>
+                <p>@unpaidCount</p>
+                <small>Last month: 0</small>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="col-4 mb-3">
-    <div class="card h-100">
-        <div class="card-body">
-            <h3>Overdue</h3>
-            <p>@overdueCount</p>
-            <small>Last month: 0</small>
+    <div class="m-2" style="flex: 1;">
+        <div class="card h-100">
+            <div class="card-body p-2">
+                <h4>Overdue  <i class="bi bi-exclamation-octagon"></i> </h4>
+                <p>@overdueCount</p>
+                <small>Last month: 0</small>
+            </div>
         </div>
     </div>
 </div>

@@ -56,7 +56,7 @@ builder.Services.AddIdentity<AccountUser, IdentityRole>(x =>
 builder.Services.ConfigureApplicationCookie(x =>
 {
     x.LoginPath = "/Login";
-    x.AccessDeniedPath = "/Accessdenied";
+    x.AccessDeniedPath = "/Error/403";
     x.Cookie.IsEssential = true;
     x.ExpireTimeSpan = TimeSpan.FromDays(30);
     x.SlidingExpiration = true;

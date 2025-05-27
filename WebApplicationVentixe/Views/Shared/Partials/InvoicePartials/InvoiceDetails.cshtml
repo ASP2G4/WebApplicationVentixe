@@ -2,90 +2,84 @@
 
 <div class="card">
     <div class="card-body">
-        <div>
-            <div class="row mb-md-5">
-                <div class="col-md-6 text-start">
-                    <strong>
-                        Invoice Details
-                    </strong>
-                </div>
-                <div class="col-md-6 text-end">
-                    <strong>
-                        Download
-                    </strong>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="mb-0">Invoice Details</h4>
 
-                    <button>
-                        Left arrow
-                    </button>
-                    <button>
-                        right arrow
-                    </button>						
-                </div>
+            <div>
+                <button class="btn-primary me-2">
+                    <i class="bi bi-download"></i> Download
+                </button>
+                <button class="btn-primary me-1">
+                    <i class="bi bi-arrow-left-short"></i>
+                </button>
+                <button class="btn-primary">
+                    <i class="bi bi-arrow-right-short"></i>
+                </button>
+            </div>
+        </div>
+
+
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3>#@Model.InvoiceNumber</h3>
+                <strong>@Model.StatusName</strong>
             </div>
 
-
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>#@Model.InvoiceNumber</h3>
-                    <strong>@Model.StatusName</strong>
-                </div>
-                <div class="col-md-6 text-end">
-                    <p><strong>Issued Date:</strong>@Model.StartDate</p>
-                    <p><strong>Due Date:</strong>@Model.EndDate</p>
-                </div>
+            <div class="col-md-6 text-md-end">
+                <p><strong>Issued Date:</strong>@Model.StartDate</p>
+                <p><strong>Due Date:</strong>@Model.EndDate</p>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-md-6 text-start">
-                    <div>
-                        <small>Bill from</small>
-                    </div>
-                    <div class="">
-                        <p>@Model.CompanyName</p>
-                        <p>@Model.CompanyAddress</p>
-                        <p>@Model.CompanyPhone</p>
-                        <p>@Model.CompanyEmail</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 text-end">
-                    <div>
-                        <small>Bill to</small>
-                    </div>
-                    <div class="">
-                        <p>@Model.UserName</p>
-                        <p>@Model.UserAddress</p>
-                        <p>@Model.UserPhone</p>
-                        <p>@Model.UserEmail</p>
-                    </div>
-                </div>
-
+        <div class="row mb-4">
+            <div class="col-md-6">
                 <div>
-                    <strong>
-                        Ticket Details
-                    </strong>                    
+                    <small class="text-muted">Bill from</small>
                 </div>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Ticket Category</th>
-                            <th>Price</th>
-                            <th>Qty</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>                        
-                         <tr>
-                            <td>@Model.TicketCategory</td>
-                            <td>@Model.TicketPrice</td>
-                            <td>@Model.TicketCount</td>
-                            <td>@(Model.TicketCount * Model.TicketPrice)</td>
-                        </tr>                   
-                    </tbody>
-                </table>
+                <address class="mt-1">
+                    <p class="mb-1">@Model.CompanyName</p>
+                    <p class="mb-1">@Model.CompanyAddress</p>
+                    <p class="mb-1">@Model.CompanyPhone</p>
+                    <p>@Model.CompanyEmail</p>
+                </address>
             </div>
-        </div>        
+
+            <div class="col-md-6 text-end">
+                <small class="text-muted">Bill to</small>
+                <address class="mt-1">
+                    <p class="mb-1">@Model.UserName</p>
+                    <p class="mb-1">@Model.UserAddress</p>
+                    <p class="mb-1">@Model.UserPhone</p>
+                    <p>@Model.UserEmail</p>
+                </address>
+            </div>
+        </div>
+
+        <section>
+            <h6 class="mb-3">
+                Ticket Details
+            </h6>                    
+
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Ticket Category</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody>                        
+                        <tr>
+                        <td>@Model.TicketCategory</td>
+                        <td>@Model.TicketPrice</td>
+                        <td>@Model.TicketCount</td>
+                        <td>@(Model.TicketCount * Model.TicketPrice)</td>
+                    </tr>                   
+                </tbody>
+            </table>
+        </section>
     </div>
 </div>
