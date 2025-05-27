@@ -23,6 +23,7 @@ builder.Services.AddScoped<IJwtManager, JwtManager>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<InvoiceGrpcClientService>();
 
+builder.Services.AddHttpClient<BookingsService>();
 
 builder.Services.AddGrpcClient<ProfileHandler.ProfileHandlerClient>(options =>
 {
