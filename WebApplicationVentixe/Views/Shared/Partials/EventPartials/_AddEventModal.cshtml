@@ -27,33 +27,36 @@
 
                     <div class="mb-3">
                         <label asp-for="EventDate" class="form-label">Event Date</label>
-                        <input asp-for="EventDate" type="date" class="form-control" />
+                        <input asp-for="EventDate" type="date" class="form-control" min="@DateTime.Today.ToString("yyyy-MM-dd")"/>
                     </div>
 
-                    <div class="mb-3">
-                        <label asp-for="SilverTicketAmount" class="form-label">Silver Ticket Amount</label>
-                        <input asp-for="SilverTicketAmount" class="form-control" />
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label asp-for="SilverTicketAmount" class="form-label">Silver Ticket Amount</label>
+                            <input asp-for="SilverTicketAmount" type="number" class="form-control" min="1" />
+                        </div>
+                        <div class="col">
+                            <label asp-for="SilverTicketPrice" class="form-label">Silver Ticket Price</label>
+                            <input asp-for="SilverTicketPrice" type="number" class="form-control" min="1" step="0.01" />
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label asp-for="SilverTicketPrice" class="form-label" >Silver Ticket Price</label>
-                        <input asp-for="SilverTicketPrice" class="form-control" />
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label asp-for="GoldTicketAmount" class="form-label">Gold Ticket Amount</label>
+                            <input asp-for="GoldTicketAmount" type="number" class="form-control" min="1" />
+                        </div>
+                        <div class="col">
+                            <label asp-for="GoldTicketPrice" class="form-label">Gold Ticket Price</label>
+                            <input asp-for="GoldTicketPrice" type="number" class="form-control" min="1" step="0.01"/>
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label asp-for="GoldTicketAmount" class="form-label">Gold Ticket Amount</label>
-                        <input asp-for="GoldTicketAmount" class="form-control" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="GoldTicketPrice" class="form-label">Gold Ticket Price</label>
-                        <input asp-for="GoldTicketPrice" class="form-control" />
-                    </div>
+                    
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Create</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>

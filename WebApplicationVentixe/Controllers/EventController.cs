@@ -57,7 +57,8 @@ public class EventController : Controller
             ModelState.AddModelError("", $"Unexpected error: {ex.Message}");
         }
 
-        return View("Index");
+        var allEvents = await _httpClient.GetFromJsonAsync<List<EventsViewModel>>(_eventApiUrl);
+        return View("Index", allEvents);
     }
 
     [HttpPut]
