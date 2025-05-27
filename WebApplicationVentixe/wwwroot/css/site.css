@@ -202,7 +202,7 @@ a {
     }
 
 .btn-cred {
-    color: var(--button-text-color);
+    color: var(--button-primary-text-color);
     border: 1px solid var(--button-border-color);
     background-color: var(--button-background-color);
     transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
@@ -217,7 +217,7 @@ a {
 
     .btn-cred:hover {
         text-decoration: none;
-        color: var(--button-text-color);
+        color: var(--button-primary-text-color) !important;
         border: 1px solid var(--button-border-color);
         background-color: var(--button-background-color);
         transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
