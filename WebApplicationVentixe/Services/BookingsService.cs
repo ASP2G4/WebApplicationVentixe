@@ -2,14 +2,16 @@
 
 namespace WebApplicationVentixe.Services;
 
-public class BookingsService(HttpClient httpClient)
+public class BookingsService(HttpClient httpClient, IConfiguration config)
 {
     private readonly HttpClient _httpClient = httpClient;
+    private readonly string _apiUrl = config["BookingsService:ConnectionString"]!;
+    private readonly string _apiKey = config["BookingsService:SecretKey"]!;
 
     public async Task<List<BookingViewModel>?> GetAllBookingsAsync()
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, "https://asp2ventixe-hydce2e3guamhacr.swedencentral-01.azurewebsites.net/api/bookings");
-        request.Headers.Add("x-api-key", "0c96559449514d8eaabe31e116f5be2a");
+        var request = new HttpRequestMessage(HttpMethod.Get, _apiUrl);
+        request.Headers.Add("x-api-key", _apiKey);
 
         var response = await _httpClient.SendAsync(request);
 
