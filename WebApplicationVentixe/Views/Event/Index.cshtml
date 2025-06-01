@@ -4,26 +4,26 @@
 
 <div>
 
-    <div style="padding: 10px;">
-        <div style="display: flex; gap: 40rem;">
+    <div class="event-spacing">
+        <div class="event-button">
             
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal">Add Event</button>
         </div>
         
 
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; padding-top: 10px;">
+        <div class="events-area">
             @foreach (var eventModel in Model)
             {
-            <div class="card" style="width: 18rem;">
+                <div class="card event-card">
                 <img src="~/Images/ventixevent.jpg" class="card-img-top" alt="A ventixe event">
-                <div class="card-body" style="display: flex; flex-direction: column; height: 100%;">
+                    <div class="card-body event-card-body">
                     <h5 class="card-title">@eventModel.EventName</h5>
                     <p class="card-text">@eventModel.EventDescription</p>
-                    <div style="margin-top: auto; display: flex; flex-direction: column;">
-                    <p class="card-text">@eventModel.EventLocation</p>
-                    <p class="card-text">@eventModel.EventDate.ToString("yyyy-MM-dd")</p>
+                        <div class="card-text">
+                        <p class="card-text">@eventModel.EventLocation</p>
+                        <p class="card-text">@eventModel.EventDate.ToString("yyyy-MM-dd")</p>
                     @* AI KNAPP *@
-                    <div style="display: flex; justify-content: flex-end;">
+                            <div class="card-button">
                     <a href="@Url.Action("EventDetails", "Event", new { id = eventModel.Id })" class="btn btn-primary">Mer info</a>
                     </div>
                     </div>

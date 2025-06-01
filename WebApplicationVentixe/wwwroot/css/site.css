@@ -320,3 +320,41 @@ a {
 .nav-link:focus {
     color: var(--bs-nav-link-hover-color) !important;
 }
+
+
+.event-spacing{
+    padding: 10px;
+}
+
+.event-button{
+    display: flex;
+    gap: 40rem;
+}
+
+.events-area{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 10rem;
+}
+
+.event-card{
+    width: 18rem;
+}
+
+.event-card-body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-text{
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-button{
+    display: flex;
+    justify-content: flex-end;
+}

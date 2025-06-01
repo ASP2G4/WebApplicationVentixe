@@ -13,11 +13,11 @@
     {
         if(ticket.Category.CategoryName == "SILVER")
         {
-            <button style="color:grey">@ticket.TicketPrice</button>
+            <button class="btn" style="color:grey">@ticket.Category.CategoryName</button>
         }
         else
         {
-            <button style="color:yellow">@ticket.TicketPrice</button>
+            <button class="btn" style="color:yellow">@ticket.Category.CategoryName</button>
         }
     }
 </div>
